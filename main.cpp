@@ -16,13 +16,18 @@ int main()
 
             auto start_time = chrono::high_resolution_clock::now();
             mpz_t k;
+            mpz_t l;
+            mpz_t m;
             mpz_t Mp;
+            mpz_t Mp_2n;
             int count = 1;
             unsigned long int limit = p-2;
             mpz_init_set_ui(k, 4);
+            mpz_init(l);
+            mpz_init(m);
             mpz_init(Mp);
-            mpz_ui_pow_ui(Mp, 2, p);
-            mpz_sub_ui(Mp, Mp, 1);
+            mpz_ui_pow_ui(Mp_2n, 2, p);
+            mpz_sub_ui(Mp, Mp_2n, 1);
 
             cout << "\nu(0) = 4\n" << endl;
 
@@ -33,7 +38,12 @@ int main()
 
                 mpz_mul(k, k, k);
                 mpz_sub_ui(k, k, 2);
-                mpz_mod(k, k, Mp);
+                // mpz_mod(k, k, Mp);
+
+                mpz_mod(l,k,Mp_2n);
+                mpz_tdiv_q_2exp(m,k,p);
+                mpz_add(k,l,m);
+                mpz_mod(k,k,Mp);
 
                 gmp_printf("%Zd", k);
                 cout << endl << "\n";
