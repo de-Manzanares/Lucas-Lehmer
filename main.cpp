@@ -10,7 +10,7 @@ int main()
     unsigned long int p;
 
     while (true) {
-        cout << "\nCheck a Mersenne number M_p = 2^p - 1 for primality." << endl;
+        cout << "\nApply the Lucas-Lehmer method to test Mersenne number M_p = 2^p - 1 for primality." << endl;
         cout << "p = ";
         if ((cin >> p)&&(p>1)) {
 
@@ -26,6 +26,7 @@ int main()
             mpz_init(l);
             mpz_init(m);
             mpz_init(Mp);
+            mpz_init(Mp_2n);
             mpz_ui_pow_ui(Mp_2n, 2, p);
             mpz_sub_ui(Mp, Mp_2n, 1);
 
@@ -58,8 +59,12 @@ int main()
             else {
                 cout << "\nM_" << p << " is composite." << endl;
             }
+
             mpz_clear(k);
+            mpz_clear(l);
+            mpz_clear(m);
             mpz_clear(Mp);
+            mpz_clear(Mp_2n);
 
             auto end_time = chrono::high_resolution_clock::now();
             auto time = end_time-start_time;
