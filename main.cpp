@@ -94,3 +94,5 @@ int main()
 
     return 0;
 }
+
+// TODO research multiplication algorithms
